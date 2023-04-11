@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+        input{
+            font-size: 30px;
+        }
+
+        .total{
+            display: flex;
+            flex-direction: row;
+        }
+        span{
+            display: flex;
+            flex-direction: row;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Entrada: </h2>
+        <input type="text">
+        <h2>Bebidas: </h2>
+        <input type="text">
+        <h2>Refeição: </h2>
+        <input type="text">
+        <h2>Sobremesa: </h2>
+        <input type="text">    
+    </div>
+
+    <span>
+        <h2>Total Consumido: </h2>
+        <h2 id="cont">R$0.00</h2>
+    </span>
+    <span>
+        <h2>Gorjeta (10%): </h2>
+        <h2 id="gorjeta"> + R$0.00</h2>
+    </span>
+    <span class="total">
+        <h2>Total: </h2>
+        <h2 id="total"> R$0.00 </h2>
+    </span>
+    
+
+    <script>
+        let inputs = document.querySelectorAll("input")
+        for (let input of inputs){
+            input.addEventListener("input", calcularValor)
+        }
+        function calcularValor() {
+            let cont = 0.0
+            for (let input of inputs){
+                valor = input.value
+                if (valor != ''){
+                    cont += Number(valor)
+                }
+            }
+            let gorjeta = (cont * 0.1)
+            total = (cont + gorjeta)
+            
+            document.getElementById("cont").innerHTML = "R$" + String(cont.toFixed(2)) 
+            document.getElementById("gorjeta").innerHTML = "+ R$" + String(gorjeta.toFixed(2)) 
+            document.getElementById("total").innerHTML = "R$" + String(total.toFixed(2))
+        }
+    </script>
+
+</body>
+</html>
