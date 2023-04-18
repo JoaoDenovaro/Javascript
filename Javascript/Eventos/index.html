@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        body{
+            display: flex;
+
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        div{
+            width: 500px;
+            height: 300px;
+            border: 5px solid gray;
+            display: flex;
+            background-color: white;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn1{
+            background-color: brown;
+            color: white;
+            border: solid gray
+        }
+        .btn2{
+            background-color: violet;
+            color: white;
+            border: solid gray
+        }
+        .btn3{
+            background-color: yellowgreen;
+            color: white;
+            border: solid gray
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div id="ex">
+        Esse retângulo muda de cor
+    </div>
+    <span>
+        <button data-color="brown" class="btn1">Cor 1</button>
+        <button data-color="violet" class="btn2">Cor 2</button>
+        <button data-color="yellowgreen" class="btn3">Cor 3</button>
+    </span>
+
+    <script>
+        let div = document.querySelector("#ex");
+        let buttons = document.querySelectorAll("button");
+
+        for (let button of buttons){
+            button.addEventListener("click", mudar_cor)
+        }
+        div.addEventListener("mouseover", cor_branca)
+        
+        function mudar_cor(event) {
+            let btn = event.target;
+            div.style.backgroundColor = btn.dataset.color
+        }
+
+        function cor_branca(){
+            div.style.backgroundColor = "white"
+        }
+    </script>
+</body>
+</html>
