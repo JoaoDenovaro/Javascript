@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script>
+        import empregados from './jaison.json'
+        function printarLista(){
+            console.log(empregados)
+        }
+    </script> -->
+</head>
+<body>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            bottom: 500px;
+        }
+
+        td, tr, th{
+            font-size: 40px;
+            border: solid red 5px ;
+            border-radius: 15px;
+            background-color: white;
+            color: red;
+            padding: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            color: white;
+            font-weight: bold;
+            background-color: rgb(255, 0, 0);
+            border-radius: 4px;
+        }
+    </style>
+
+    <script> 
+        let empregados = {
+            "empregados" : [
+                {"nome": "Jorge", "habilidades": ["Contador", "Designer"]},
+                {"nome": "Rita", "habilidades": ["Legal", "Cheiroso"]},
+                {"nome": "Jorge", "habilidades": ["Dev Python", "Dev SQL"]},
+                {"nome": "Gilsom", "habilidades": ["Dev HTML", "Dev CSS"]}
+            ]
+        }   
+
+        function printarLista(){
+
+        tabela = document.getElementById("empregados")
+        
+        listaHtml = `
+        <table>
+        <thead>
+            <tr>
+                <th colspan="2" id="first">Atletas</th>
+            </tr>
+        `
+
+        for (pessoa of empregados.empregados){
+            
+            tabela.innerHTML += `
+            <tr>
+                <th>Nome: ${pessoa.nome}</th>
+                <th>Habilidades: ${pessoa.habilidades[0]}, ${pessoa.habilidades[1]}</th>
+            </tr>`
+        }
+        }
+    </script>
+
+    <button onclick="printarLista()"> LISTA OI </button>
+
+    <table id="empregados"></table>
+</body>
+</html>

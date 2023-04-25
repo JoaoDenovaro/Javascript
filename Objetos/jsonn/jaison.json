@@ -1,0 +1,8 @@
+{
+    "empregados" : [
+        {"nome": "Jorge", "cargo": "Contador"},
+        {"nome": "Rita", "cargo": "RH"},
+        {"nome": "Jorge", "cargo": "Dev"},
+        {"nome": "Gilsom", "cargo": "Recepcionista"}
+    ]
+}
