@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button{
+    margin-top: 20px;
+    font: solid white 50px;
+    background-color: green;
+}
+
+button#btn2{
+    padding: 5px;
+}
+img{
+    height: 30px;
+    width: 30px;
+}
