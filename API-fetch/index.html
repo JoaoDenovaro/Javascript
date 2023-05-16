@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button{
+            font-size: 30px;
+            background-color: orangered;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        button#pesq{
+            font-size: 20px;
+            background-color: orange;
+            color: white;
+            margin: 5px;
+            border-radius: 5px;
+           
+        }
+
+        h3{
+            font-size: 50px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        h4{
+            font-size: 50px;
+            margin: 10px;
+        }
+
+    </style>>
+</head>
+<body>
+    <h1> BOM DIA </h1>
+
+    <h2></h2>
+    
+    <h3 id="campo"> O que deseja fazer? </h3>
+    <button onclick="consultar_todos()"> VER TODOS OS USUÁRIOS </button>
+    <button onclick="consultador()"> CONSULTAR USUÁRIO </button>
+    <button onclick="cadastrador()"> CADASTRAR USUÁRIO </button>
+    <button onclick="alterar()"> ATUALIZAR USUÁRIO </button>
+    <button onclick="deletador()"> DELETAR USUÁRIO </button>
+
+    <script>
+        function consultar_todos(){
+            document.querySelector("#campo").innerHTML = 'Todos os usuários <br><br>'
+            dados = fetch("http://localhost:80/api")
+            .then(resposta => resposta.json())
+            .then(dados => {
+                console.log(dados)
+                for (user of dados){
+                    document.querySelector("#campo").innerHTML += "Nome: " + user.name + "// Idade: " + user.age + "// Cidade: " + user.city + "<br>"
+                }
+            
+            })
+        }
+
+        function consultador(){
+            
+            document.querySelector("#campo").innerHTML = `
+            <h4> Digite o nome: </h4> <br> 
+            <input type'text' id='nome'> 
+            <button id='pesq' onclick='consultar_um()'> Pesquisar</button>`
+        }
+
+        function consultar_um(){
+            pesq_nome = document.querySelector("#nome")
+         
+            dados = fetch("http://localhost:80/api")
+            .then(resposta => resposta.json())
+            .then(dados => {
+                for (user of dados){
+                    if (user.name == pesq_nome.value){
+                        document.querySelector("#campo").innerHTML = "Nome: " + user.name + "// Idade: " + user.age + "// Cidade: " + user.city 
+                    }
+                }
+            })
+        }
+
+        function cadastrador(){
+            document.querySelector("#campo").innerHTML = `
+            <h4> Nome: </h4>
+            <input type'text' id='nome'> <br> 
+
+            <h4> Idade: </h4>
+            <input type'text' id='idade'><br> 
+
+            <h4> Cidade: </h4> 
+            <input type'text' id='cidade'> <br> 
+            
+            <button onclick='cadastrar()'> Cadastrar</button>`
+        }
+
+        function cadastrar(){
+            let novoUsuario = {
+                name: document.querySelector("#nome").value,
+                age: document.querySelector("#idade").value, 
+                city: document.querySelector("#cidade").value
+            }
+                
+            fetch("http://localhost:80/api", {
+                method: "POST",
+                body: JSON.stringify(novoUsuario),
+                headers: {"Content-type" : "application/json"}
+            })
+            .then(resposta => resposta.json())
+            .then(dados => {
+            document.querySelector("#campo").innerHTML = dados
+            })
+        }
+
+        function deletador(){
+            document.querySelector("#campo").innerHTML = `
+            <h4> Nome a ser deletado: </h4>
+            <input type'text' id='pesq_nome'><br> 
+            
+            <button onclick='deletar()'> Deletar </button>`
+        }
+
+        function deletar(){
+            pesq_nome =  document.querySelector("#pesq_nome").value
+            fetch("http://localhost:80/api")
+            .then(resposta => resposta.json())
+            .then(dados => {
+                for (user of dados){
+                    if (user.name == pesq_nome){
+                        id = user.id
+                    }
+                }
+            })
+
+            fetch("http://localhost:80/api/" + id, {
+                method: "DELETE",
+                body: JSON.stringify(novoUsuario),
+                headers: {"Content-type" : "application/json"}
+            })
+            .then(resposta => resposta.json())
+            .then(dados => {
+            document.querySelector("#campo").innerHTML = dados
+            })
+        }
+    </script>
+
+</body>
+</html>
