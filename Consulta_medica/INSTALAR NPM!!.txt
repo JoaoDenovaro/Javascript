@@ -1,0 +1,3 @@
+rodar comando no terminal, na pasta 
+
+npm i 
